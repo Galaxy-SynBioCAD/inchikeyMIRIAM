@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
+import sys
 
+sys.path.insert(0, '/home/')
 import rpTool
 import logging
 import rpCache
@@ -15,7 +17,7 @@ def main(gem_sbml,
          out_sbml):
     rpcache = rpCache.rpCache()
     inchikeymiriam = rpTool.inchikeyMIRIAM()
-    inchikeymiriam.deprecatedCID_cid = rpcache.deprecatedCID_cid
-    inchikeymiriam.cid_strc = rpcache.cid_strc
-    inchikeymiriam.chebi_cid = rpcache.chebi_cid
+    inchikeymiriam.deprecatedCID_cid = rpcache.getDeprecatedCID()
+    inchikeymiriam.cid_strc = rpcache.getCIDstrc()
+    inchikeymiriam.chebi_cid = rpcache.getChebiCID()
     inchikeymiriam.addInChiKey(gem_sbml, out_sbml)
