@@ -1,0 +1,69 @@
+<tool id="inchikeyMIRIAM" name="inchikeyMIRIAM" version="0.1">
+	<description>Add inchikey to the MIRIAM annotation of a SBML file</description>
+  <requirements>
+    <container type="docker">brsynth/inchikeymiriam-standalone:v2</container>
+  </requirements>
+  <stdio>
+    <regex match="WARNING" level="warning" />
+    <regex match="ERROR" level="error" />
+  </stdio>
+  <command detect_errors="exit_code"><![CDATA[
+		'$__tool_directory__/tool_inchikeyMIRIAM.py' -input_sbml '$format_type.input' -output_sbml '$output' 
+  ]]></command>
+  <inputs>
+		<param name="input_sbml" type="data" format="sbml" label="Input SBML model" />
+		<param name="output_sbml" type="data" format="sbml" label="Output SBML model" />
+  </inputs>
+  <outputs>
+    <data name="output" format="sbml" label="SBML inchikeyMIRIAM" >
+		</data>
+  </outputs>
+  <help><![CDATA[
+inchikeyMIRIAM
+==============
+
+Project that parses an SBML file to find all the chemical species, and try to recover the inchikey and add it to the MIRIAM annotation.
+
+Input
+-----
+
+Required:
+
+
+* **-input_sbml**\ : (string) Path to the input SBML file
+
+Output
+------
+
+* **-output_sbml**\ : (string) Path to the output SBML file
+
+Project Links
+-------------
+
+* `GitHub <https://github.com/Galaxy-SynBioCAD/inchikeyMIRIAM>`_
+
+Version
+-------
+
+v0.1
+
+Authors
+-------
+
+* **Melchior du Lac** 
+
+License
+-------
+
+`MIT <https://raw.githubusercontent.com/Galaxy-SynBioCAD/inchikeyMIRIAM/standalone-v2/LICENSE>`_
+
+Acknowledgments
+---------------
+
+
+* Thomas Duigou
+* Joan Hérisson
+]]></help>
+  <citations>
+  </citations>
+</tool>

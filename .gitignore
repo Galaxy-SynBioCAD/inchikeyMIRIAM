@@ -1,4 +1,6 @@
 rpSBML
+__pycache__/
+*.swp
 rpCache
 rpGraph
 cache

@@ -1,5 +1,4 @@
-FROM brsynth/rpcache
+FROM brsynth/rpcache:v2
 
-COPY rpTool.py /home/
-COPY rpToolServe.py /home/
-COPY tool_InchikeyMIRIAM.py /home/
+COPY inchikeyMIRIAM.py /home/
+COPY galaxy/code/tool_inchikeyMIRIAM.py /home/
