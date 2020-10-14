@@ -27,7 +27,7 @@ def main(input_sbml, output_sbml):
     :return: None
     """
     docker_client = docker.from_env()
-    image_str = 'brsynth/inchikeyMIRIAM-standalone:v2'
+    image_str = 'brsynth/inchikeymiriam-standalone:v2'
     try:
         image = docker_client.images.get(image_str)
     except docker.errors.ImageNotFound:
@@ -55,7 +55,7 @@ def main(input_sbml, output_sbml):
             err = container.logs(stdout=True, stderr=True)
             err_str = err.decode('utf-8')
             if not 'ERROR' in err_str:
-                shutil.copy(tmpOutputFolder+'/output_sbml.dat', output)
+                shutil.copy(tmpOutputFolder+'/output_sbml.dat', output_sbml)
                 logging.info('\n'+err_str)
             else:
                 print(err_str)
