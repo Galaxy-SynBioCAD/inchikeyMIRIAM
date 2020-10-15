@@ -54,11 +54,14 @@ def main(input_sbml, output_sbml):
             container.wait()
             err = container.logs(stdout=True, stderr=True)
             err_str = err.decode('utf-8')
-            if not 'ERROR' in err_str:
-                shutil.copy(tmpOutputFolder+'/output_sbml.dat', output_sbml)
-                logging.info('\n'+err_str)
-            else:
+            if 'ERROR' in err_str:
                 print(err_str)
+            elif 'WARNING' in err_str:
+                print(err_str)
+            if not os.path.exists(tmpOutputFolder+'/output_sbml.dat'):
+                print('ERROR: Did not generate an output file')
+            else:
+                shutil.copy(tmpOutputFolder+'/output_sbml.dat', output)
             container.remove()
         else:
             logging.error('The input file cannot be found: '+str(input_sbml))
