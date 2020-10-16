@@ -5,10 +5,10 @@ import libsbml
 import logging
 import rpCache
 
-logging.basicConfig(
-    #level=logging.DEBUG,
-    #level=logging.WARNING,
-    level=logging.ERROR,
+self.logger.basicConfig(
+    #level=self.logger.DEBUG,
+    #level=self.logger.WARNING,
+    level=self.logger.ERROR,
     format='%(asctime)s.%(msecs)03d %(levelname)s %(module)s - %(funcName)s: %(message)s',
     datefmt='%d-%m-%Y %H:%M:%S',
 )
@@ -23,6 +23,7 @@ class inchikeyMIRIAM:
         self.deprecatedCID_cid = {}
         self.chebi_cid = {}
         self.cid_strc = {}
+        self.logger = logging.getLogger(__name__)
 
 
     def _checkCIDdeprecated(self, cid):
@@ -54,13 +55,13 @@ class inchikeyMIRIAM:
         :return: Success or failure of the function
         """
         filename = input_sbml.split('/')[-1].replace('.rpsbml', '').replace('.sbml', '').replace('.xml', '')
-        logging.debug(filename)
+        self.logger.debug(filename)
         rpsbml = rpSBML.rpSBML(filename, path=input_sbml)
         for spe in rpsbml.model.getListOfSpecies():
             inchikey = None
             miriam_dict = rpsbml.readMIRIAMAnnotation(spe.getAnnotation())
             if 'inchikey' in miriam_dict:
-                self.logging.info('The species '+str(spe.id)+' already has an inchikey... skipping')
+                self.logger.info('The species '+str(spe.id)+' already has an inchikey... skipping')
                 continue
             try:
                 for mnx in miriam_dict['metanetx']:
@@ -68,7 +69,7 @@ class inchikeyMIRIAM:
                     if inchikey:
                         rpsbml.addUpdateMIRIAM(spe, 'species', {'inchikey': [inchikey]})
                     else:
-                        logging.warning('The inchikey is empty for: '+str(spe.id))
+                        self.logger.warning('The inchikey is empty for: '+str(spe.id))
                     continue
             except KeyError:
                 try:
@@ -77,10 +78,10 @@ class inchikeyMIRIAM:
                         if inchikey:
                             rpsbml.addUpdateMIRIAM(spe, 'species', {'inchikey': [inchikey]})
                         else:
-                            logging.warning('The inchikey is empty for: '+str(spe.id))
+                            self.logger.warning('The inchikey is empty for: '+str(spe.id))
                         continue
                 except KeyError:
-                    logging.warning('Cannot find the inchikey for: '+str(spe.id))
+                    self.logger.warning('Cannot find the inchikey for: '+str(spe.id))
         libsbml.writeSBMLToFile(rpsbml.document, output_sbml)
         return True
 
