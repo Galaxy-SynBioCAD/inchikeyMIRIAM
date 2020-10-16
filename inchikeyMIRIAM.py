@@ -6,9 +6,9 @@ import logging
 import rpCache
 
 logging.basicConfig(
-    #level=self.logger.DEBUG,
-    #level=self.logger.WARNING,
-    level=self.logger.ERROR,
+    #level=logging.DEBUG,
+    #level=logging.WARNING,
+    level=logging.ERROR,
     format='%(asctime)s.%(msecs)03d %(levelname)s %(module)s - %(funcName)s: %(message)s',
     datefmt='%d-%m-%Y %H:%M:%S',
 )
