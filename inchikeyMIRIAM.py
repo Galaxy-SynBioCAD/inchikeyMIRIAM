@@ -5,7 +5,7 @@ import libsbml
 import logging
 import rpCache
 
-self.logger.basicConfig(
+logging.basicConfig(
     #level=self.logger.DEBUG,
     #level=self.logger.WARNING,
     level=self.logger.ERROR,
