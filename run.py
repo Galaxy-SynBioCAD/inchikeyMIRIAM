@@ -27,7 +27,7 @@ def main(input_sbml, output_sbml):
     :return: None
     """
     docker_client = docker.from_env()
-    image_str = 'brsynth/inchikeymiriam-standalone:v2'
+    image_str = 'brsynth/inchikeymiriam-standalone'
     try:
         image = docker_client.images.get(image_str)
     except docker.errors.ImageNotFound:
