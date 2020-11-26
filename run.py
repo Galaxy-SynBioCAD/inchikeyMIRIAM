@@ -61,7 +61,7 @@ def main(input_sbml, output_sbml):
             if not os.path.exists(tmpOutputFolder+'/output_sbml.dat'):
                 print('ERROR: Did not generate an output file')
             else:
-                shutil.copy(tmpOutputFolder+'/output_sbml.dat', output)
+                shutil.copy(tmpOutputFolder+'/output_sbml.dat', output_sbml)
             container.remove()
         else:
             logging.error('The input file cannot be found: '+str(input_sbml))
